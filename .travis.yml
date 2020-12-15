@@ -27,7 +27,7 @@ after_script:
 
 branches:
   only:
-    - main
+    - main  #设置git分支名
 
 env:
   global:
