@@ -30,12 +30,12 @@
       "showLevel": false
     },
     "disqus": {
-      "shortName": "gitbook-template"
+      "shortName": "mybook"
     },
     "github-buttons": {
       "buttons": [{
         "user": "riskers",
-        "repo": "gitbook-template",
+        "repo": "mybook",
         "type": "star",
         "size": "small",
         "count": true
@@ -68,8 +68,8 @@
       "path": "/"
     },
     "donate": {
-      "wechat": "https://riskers.github.io/gitbook-template/wechat.jpg",
-      "alipay": "https://riskers.github.io/gitbook-template/alipay.jpg",
+      "wechat": "https://diyiyao.github.io/mybook/wechat.jpg",
+      "alipay": "https://diyiyao.github.io/mybook/alipay.jpg",
       "title": "",
       "button": "赏",
       "alipayText": "支付宝打赏",
