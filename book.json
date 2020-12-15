@@ -30,7 +30,7 @@
       "showLevel": false
     },
     "disqus": {
-      "shortName": "mybook"
+      "shortName": "https-diyiyao-github-io-mybook"
     },
     "github-buttons": {
       "buttons": [{
@@ -42,7 +42,7 @@
       }]
     },
     "editlink": {
-      "base": "http://www.baiduc.com",
+      "base": "http://www.baidu.com",
       "label": "Edit",
       "multilingual": false
     },
