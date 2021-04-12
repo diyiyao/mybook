@@ -1,9 +1,6 @@
-#@Resource、@Autowired、@Value的循环依赖问题
+#[@Resource、@Autowired、@Value的循环依赖问题]()
 
-@Resource和@Autowired两个注解大家应该很熟悉，在spring中我们通常使用@Resource和@Autowired做bean的注入时使用。
-Spring 创建 bean 的流程，即 Spring 先通过反射创建一个原始的 bean 对象，然后再向这个原始的 bean 对象中填充属性。
-在Bean实例化时候属性填充 方法入口:`org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#populateBean`
-在populateBean方法中会将业务逻辑交由不同的spring后置处理器(InstantiationAwareBeanPostProcessor==>BeanPostProcessor)。
+@Resource和@Autowired两个注解大家应该很熟悉，在spring中我们通常使用@Resource和@Autowired做bean的注入时使用。Spring 创建 bean 的流程，即 Spring 先通过反射创建一个原始的 bean 对象，然后再向这个原始的 bean 对象中填充属性。 在Bean实例化时候属性填充 方法入口:`org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#populateBean`在populateBean方法中会将业务逻辑交由不同的spring后置处理器(InstantiationAwareBeanPostProcessor==>BeanPostProcessor)。
 
 ![](../jpg/spring后置处理器列表.png)
 
@@ -14,7 +11,7 @@ Spring 创建 bean 的流程，即 Spring 先通过反射创建一个原始的 b
 > + @Resource在Spring填充时机是交由org.springframework.context.annotation.CommonAnnotationBeanPostProcessor#postProcessPropertyValues方法
 > + @Autowired在Spring填充时机是交由org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues方法
 
-正常配置bean填充参数：
+###[正常配置bean填充参数]()：
 ````java
 @Component
 public class BeanConfig {
@@ -85,7 +82,7 @@ public class ExampleController {
 Example{id='ide', name='name'}
 ````
 
-循环配置bean填充参数:
+###[循环配置bean填充参数]()
 
 ````java
 @Component

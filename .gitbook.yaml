@@ -1,5 +1,5 @@
 root: .
 
 structure:
-  readme:  目录.md
+  readme:  directory.md
   summary: SUMMARY.md
