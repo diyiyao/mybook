@@ -1,17 +1,19 @@
 #[@Resource、@Autowired、@Value的循环依赖问题]()
 
-@Resource和@Autowired两个注解大家应该很熟悉，在spring中我们通常使用@Resource和@Autowired做bean的注入时使用。Spring 创建 bean 的流程，即 Spring 先通过反射创建一个原始的 bean 对象，然后再向这个原始的 bean 对象中填充属性。 在Bean实例化时候属性填充 方法入口:`org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#populateBean`在populateBean方法中会将业务逻辑交由不同的spring后置处理器(InstantiationAwareBeanPostProcessor==>BeanPostProcessor)。
+@Resource和@Autowired两个注解大家应该很熟悉，在spring中我们通常使用@Resource和@Autowired做bean的注入时使用。Spring 创建 bean 的流程，即 Spring 先通过反射创建一个原始的 bean 对象，然后再向这个原始的 bean 对象中填充属性。 
+
+在Bean实例化时候属性填充方法入口:`org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#populateBean`,方法中会将业务逻辑交由不同的spring后置处理器 `InstantiationAwareBeanPostProcessor==>BeanPostProcessor`。
 
 ![](../jpg/spring后置处理器列表.png)
 
-从图中可知:后置处理器按排序依次执行 `CommonAnnotationBeanPostProcessor 早于 AutowiredAnnotationBeanPostProcessor`
 
-
-> 不同点：
+> 填充时机：
 > + @Resource在Spring填充时机是交由org.springframework.context.annotation.CommonAnnotationBeanPostProcessor#postProcessPropertyValues方法
 > + @Autowired在Spring填充时机是交由org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues方法
 
-###[正常配置bean填充参数]()：
+从图中可知:后置处理器按排序依次执行 `CommonAnnotationBeanPostProcessor 早于 AutowiredAnnotationBeanPostProcessor`
+
+###[正常bean填充参数]()：
 ````java
 @Component
 public class BeanConfig {
@@ -82,7 +84,7 @@ public class ExampleController {
 Example{id='ide', name='name'}
 ````
 
-###[循环配置bean填充参数]()
+###[依赖bean填充参数]()
 
 ````java
 @Component
@@ -185,12 +187,12 @@ public class Example1 {
 ````
 
 
-##BeanConfig类是在什么时候将处理@Bean/@Value/@Resource/@Autowired
+##BeanConfig类什么时候处理@Bean/@Value/@Resource/@Autowired注解
 AnnotationConfigUtils.registerAnnotationConfigProcessors方法的调用中， 可以看到spring注册了多个与注解处理相关的类，其中包括用于处理@Configuration或@ComponentScan注解配置的类ConfigurationClassPostProcessor
 
-待更新
 
-`@Bean`:相当于定义BeanDefinition 放到BeanDefinitionMap中去，方法名为beanName。
+
+`@Bean`:相当于定义BeanDefinition 放到BeanDefinitionMap中去，方法名为beanName。<font color="red">待更新</font>
 
 `@Value`:扫描@Component注解类，将类信息存放到放到BeanDefinitionMap中去，然后交由spring容器准备实例化bean
 触发属性填充。填充逻辑将在AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues方法
@@ -201,7 +203,7 @@ AnnotationConfigUtils.registerAnnotationConfigProcessors方法的调用中， �
 `@Autowired`:扫描@Component注解类，将类信息存放到放到BeanDefinitionMap中去，然后交由spring容器准备实例化bean
 触发属性填充。填充逻辑将在AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues方法
 
-####所以@Bean类中的初始化流程慢于@Value属性填充。
+**所以@Bean类中的初始化流程慢于@Value属性填充。**
 
 ###正常情况:
 这种情况很常用，比如平时使用config类 注入一些外部配置类如:kafka、redis、dubbo、邮箱信息。
@@ -309,6 +311,13 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 
 
 ````
+
+##结论
+>说一下个人的见解:
+> + 如果可以，尽量使用@Autowired注解把,如果是生产环境的话，架构师对这方面要求有比较严格的情况下，会让大家使用@Resource(name="xxx")这种，因为在生产环境就会要求更高的效率问题，这样使用效率是最高的，类似于根据id查询数据库一样，效率高一些。不过这一点效率不关紧要。
+> + bean依赖关系，尽量成树形结构，避免网状生成循环依赖。
+> + bean依赖层级尽量不要超过四层，一旦链路过长，属性填充导入时，风险和bug也将逐步提升，且出现异常不好排查原因。
+> + 先写@Autowired 再写@Value
 
 
 
