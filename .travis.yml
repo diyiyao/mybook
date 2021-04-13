@@ -14,7 +14,6 @@ install:
   - npm install --save gitbook-plugin-todo
   - npm install -g gitbook-cli
   - gitbook install
-  - gitbook serve
 
 script:
   - gitbook build
