@@ -1,0 +1,933 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>@Resource、@Autowired、@Value的循环依赖 · title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-solarizedlight.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-bibtex-indexed-cite/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Spring源码之@Component注解解析.html" />
+    
+    
+    <link rel="prev" href="@Resource和@Autowired的区别.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../intro/">
+            
+                <a href="../../intro/">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../tools/directory.html">
+            
+                <a href="../../tools/directory.html">
+            
+                    
+                    工具类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../tools/GitBook.html">
+            
+                <a href="../../tools/GitBook.html">
+            
+                    
+                    GitBook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../tools/Markdown.html">
+            
+                <a href="../../tools/Markdown.html">
+            
+                    
+                    Markdown
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../works/directory.html">
+            
+                <a href="../../works/directory.html">
+            
+                    
+                    工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../works/付款单模型.html">
+            
+                <a href="../../works/付款单模型.html">
+            
+                    
+                    付款单模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../works/常用命令/directory.html">
+            
+                <a href="../../works/常用命令/directory.html">
+            
+                    
+                    常用命令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../works/常用命令/curl的用法指南.html">
+            
+                <a href="../../works/常用命令/curl的用法指南.html">
+            
+                    
+                    curl的用法指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../directory.html">
+            
+                <a href="../directory.html">
+            
+                    
+                    博客
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../DDD/directory.html">
+            
+                <a href="../DDD/directory.html">
+            
+                    
+                    DDD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../DDD/微服务代码模型.html">
+            
+                <a href="../DDD/微服务代码模型.html">
+            
+                    
+                    微服务代码模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../DDD/资金认领的实践.html">
+            
+                <a href="../DDD/资金认领的实践.html">
+            
+                    
+                    资金认领的实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../git/directory.html">
+            
+                <a href="../git/directory.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../git/git发布流程.html">
+            
+                <a href="../git/git发布流程.html">
+            
+                    
+                    git发布流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="directory.html">
+            
+                <a href="directory.html">
+            
+                    
+                    spring
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="@Resource和@Autowired的区别.html">
+            
+                <a href="@Resource和@Autowired的区别.html">
+            
+                    
+                    @Resource和@Autowired的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3.2" data-path="@Resource、@Autowired、@Value的循环依赖.html">
+            
+                <a href="@Resource、@Autowired、@Value的循环依赖.html">
+            
+                    
+                    @Resource、@Autowired、@Value的循环依赖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="Spring源码之@Component注解解析.html">
+            
+                <a href="Spring源码之@Component注解解析.html">
+            
+                    
+                    Spring源码之@Component注解解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../question/directory.html">
+            
+                <a href="../../question/directory.html">
+            
+                    
+                    问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../question/springboot/directory.html">
+            
+                <a href="../../question/springboot/directory.html">
+            
+                    
+                    springboot
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../question/springboot/数据源配置问题.html">
+            
+                <a href="../../question/springboot/数据源配置问题.html">
+            
+                    
+                    数据源配置问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../question/java/directory.html">
+            
+                <a href="../../question/java/directory.html">
+            
+                    
+                    java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../question/java/snowflake时间回退.html">
+            
+                <a href="../../question/java/snowflake时间回退.html">
+            
+                    
+                    snowflake时间回退问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >@Resource、@Autowired、@Value的循环依赖</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#resource&#x3001;autowired&#x3001;value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;"><b></b>@Resource&#x3001;@Autowired&#x3001;@Value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;</a></li><ul><ul><li><span class="title-icon "></span><a href="#&#x6B63;&#x5E38;bean&#x586B;&#x5145;&#x53C2;&#x6570;&#xFF1A;"><b></b>&#x6B63;&#x5E38;bean&#x586B;&#x5145;&#x53C2;&#x6570;&#xFF1A;</a></li><li><span class="title-icon "></span><a href="#&#x4F9D;&#x8D56;bean&#x586B;&#x5145;&#x53C2;&#x6570;"><b></b>&#x4F9D;&#x8D56;bean&#x586B;&#x5145;&#x53C2;&#x6570;</a></li></ul><li><span class="title-icon "></span><a href="#beanconfig&#x7C7B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5904;&#x7406;beanvalueresourceautowired&#x6CE8;&#x89E3;"><b></b>BeanConfig&#x7C7B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5904;&#x7406;@Bean/@Value/@Resource/@Autowired&#x6CE8;&#x89E3;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6B63;&#x5E38;&#x60C5;&#x51B5;"><b></b>&#x6B63;&#x5E38;&#x60C5;&#x51B5;:</a></li><li><span class="title-icon "></span><a href="#resource&#x5F02;&#x5E38;&#x60C5;&#x51B5;"><b></b>@Resource&#x5F02;&#x5E38;&#x60C5;&#x51B5;:</a></li><li><span class="title-icon "></span><a href="#autowired&#x6B63;&#x5E38;&#x60C5;&#x51B5;"><b></b>@Autowired&#x6B63;&#x5E38;&#x60C5;&#x51B5;:</a></li><li><span class="title-icon "></span><a href="#autowired&#x5F02;&#x5E38;&#x60C5;&#x51B5;"><b></b>@Autowired&#x5F02;&#x5E38;&#x60C5;&#x51B5;:</a></li></ul><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BBA;"><b></b>&#x7ED3;&#x8BBA;</a></li></ul></ul></div><a href="#resource&#x3001;autowired&#x3001;value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="resource&#x3001;autowired&#x3001;value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;"><a name="resource&#x3001;autowired&#x3001;value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#resource&#x3001;autowired&#x3001;value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a><a href="">@Resource&#x3001;@Autowired&#x3001;@Value&#x7684;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x95EE;&#x9898;</a></h1>
+<p>@Resource&#x548C;@Autowired&#x4E24;&#x4E2A;&#x6CE8;&#x89E3;&#x5927;&#x5BB6;&#x5E94;&#x8BE5;&#x5F88;&#x719F;&#x6089;&#xFF0C;&#x5728;spring&#x4E2D;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x4F7F;&#x7528;@Resource&#x548C;@Autowired&#x505A;bean&#x7684;&#x6CE8;&#x5165;&#x65F6;&#x4F7F;&#x7528;&#x3002;Spring &#x521B;&#x5EFA; bean &#x7684;&#x6D41;&#x7A0B;&#xFF0C;&#x5373; Spring &#x5148;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x539F;&#x59CB;&#x7684; bean &#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5411;&#x8FD9;&#x4E2A;&#x539F;&#x59CB;&#x7684; bean &#x5BF9;&#x8C61;&#x4E2D;&#x586B;&#x5145;&#x5C5E;&#x6027;&#x3002; </p>
+<p>&#x5728;Bean&#x5B9E;&#x4F8B;&#x5316;&#x65F6;&#x5019;&#x5C5E;&#x6027;&#x586B;&#x5145;&#x65B9;&#x6CD5;&#x5165;&#x53E3;:<code>org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#populateBean</code>,&#x65B9;&#x6CD5;&#x4E2D;&#x4F1A;&#x5C06;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x4EA4;&#x7531;&#x4E0D;&#x540C;&#x7684;spring&#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668; <code>InstantiationAwareBeanPostProcessor==&gt;BeanPostProcessor</code>&#x3002;</p>
+<p><img src="../jpg/spring&#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x5217;&#x8868;.png" alt=""></p>
+<blockquote>
+<p>&#x586B;&#x5145;&#x65F6;&#x673A;&#xFF1A;</p>
+<ul>
+<li>@Resource&#x5728;Spring&#x586B;&#x5145;&#x65F6;&#x673A;&#x662F;&#x4EA4;&#x7531;org.springframework.context.annotation.CommonAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</li>
+<li>@Autowired&#x5728;Spring&#x586B;&#x5145;&#x65F6;&#x673A;&#x662F;&#x4EA4;&#x7531;org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</li>
+</ul>
+</blockquote>
+<p>&#x4ECE;&#x56FE;&#x4E2D;&#x53EF;&#x77E5;:&#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x6309;&#x6392;&#x5E8F;&#x4F9D;&#x6B21;&#x6267;&#x884C; <code>CommonAnnotationBeanPostProcessor &#x65E9;&#x4E8E; AutowiredAnnotationBeanPostProcessor</code></p>
+<h3 id="&#x6B63;&#x5E38;bean&#x586B;&#x5145;&#x53C2;&#x6570;&#xFF1A;"><a name="&#x6B63;&#x5E38;bean&#x586B;&#x5145;&#x53C2;&#x6570;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#&#x6B63;&#x5E38;bean&#x586B;&#x5145;&#x53C2;&#x6570;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a><a href="">&#x6B63;&#x5E38;bean&#x586B;&#x5145;&#x53C2;&#x6570;</a>&#xFF1A;</h3>
+<pre class="language-"><code class="lang-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BeanConfig</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${id}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${name}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+<span class="token comment">//    @Resource</span>
+<span class="token comment">//    private Example1 example1;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Example</span> <span class="token function">example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">Example</span> example <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> example<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;Example{&quot;</span> <span class="token operator">+</span>
+                <span class="token string">&quot;id=&apos;&quot;</span> <span class="token operator">+</span> id <span class="token operator">+</span> <span class="token string">&apos;\&apos;&apos;</span> <span class="token operator">+</span>
+                <span class="token string">&quot;, name=&apos;&quot;</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">&apos;\&apos;&apos;</span> <span class="token operator">+</span>
+                <span class="token string">&apos;}&apos;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExampleController</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example</span> example<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/example&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">example</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> example<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;:</p>
+<pre class="language-"><code>Example{id=&apos;ide&apos;, name=&apos;name&apos;}
+</code></pre><h3 id="&#x4F9D;&#x8D56;bean&#x586B;&#x5145;&#x53C2;&#x6570;"><a name="&#x4F9D;&#x8D56;bean&#x586B;&#x5145;&#x53C2;&#x6570;" class="anchor-navigation-ex-anchor" href="#&#x4F9D;&#x8D56;bean&#x586B;&#x5145;&#x53C2;&#x6570;"><i class="fa fa-link" aria-hidden="true"></i></a><a href="">&#x4F9D;&#x8D56;bean&#x586B;&#x5145;&#x53C2;&#x6570;</a></h3>
+<pre class="language-"><code class="lang-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BeanConfig</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${id}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${name}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Resource</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example1</span> example1<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Example</span> <span class="token function">example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">Example</span> example <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> example<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example1</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example</span> example<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;:</p>
+<pre class="language-"><code>Example{id=&apos;null&apos;, name=&apos;null&apos;}
+</code></pre><p>&#x5982;&#x679C;&#x5C06; <code>@Resource</code> &#x5C06;&#x4FEE;&#x6539;&#x6210; <code>@Autowired</code> </p>
+<pre class="language-"><code class="lang-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BeanConfig</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${id}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${name}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example1</span> example1<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Example</span> <span class="token function">example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">Example</span> example <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> example<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example1</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example</span> example<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x53C8;&#x6B63;&#x5E38;&#x4E86;</p>
+<pre class="language-"><code>Example{id=&apos;ide&apos;, name=&apos;name&apos;}
+</code></pre><p>&#x5982;&#x679C;&#x5C06; <code>@Autowired</code> &#x548C; <code>@Value</code> &#x4F4D;&#x7F6E;&#x5BF9;&#x6362;&#x4E00;&#x4E0B;</p>
+<pre class="language-"><code class="lang-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BeanConfig</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example1</span> example1<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${id}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${name}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Example</span> <span class="token function">example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">Example</span> example <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        example<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> example<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example1</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Example</span> example<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="beanconfig&#x7C7B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5904;&#x7406;beanvalueresourceautowired&#x6CE8;&#x89E3;"><a name="beanconfig&#x7C7B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5904;&#x7406;beanvalueresourceautowired&#x6CE8;&#x89E3;" class="anchor-navigation-ex-anchor" href="#beanconfig&#x7C7B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5904;&#x7406;beanvalueresourceautowired&#x6CE8;&#x89E3;"><i class="fa fa-link" aria-hidden="true"></i></a>BeanConfig&#x7C7B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5904;&#x7406;@Bean/@Value/@Resource/@Autowired&#x6CE8;&#x89E3;</h2>
+<p>AnnotationConfigUtils.registerAnnotationConfigProcessors&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x4E2D;&#xFF0C; &#x53EF;&#x4EE5;&#x770B;&#x5230;spring&#x6CE8;&#x518C;&#x4E86;&#x591A;&#x4E2A;&#x4E0E;&#x6CE8;&#x89E3;&#x5904;&#x7406;&#x76F8;&#x5173;&#x7684;&#x7C7B;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x62EC;&#x7528;&#x4E8E;&#x5904;&#x7406;@Configuration&#x6216;@ComponentScan&#x6CE8;&#x89E3;&#x914D;&#x7F6E;&#x7684;&#x7C7B;ConfigurationClassPostProcessor</p>
+<p><code>@Bean</code>:&#x76F8;&#x5F53;&#x4E8E;&#x5B9A;&#x4E49;BeanDefinition &#x653E;&#x5230;BeanDefinitionMap&#x4E2D;&#x53BB;&#xFF0C;&#x65B9;&#x6CD5;&#x540D;&#x4E3A;beanName&#x3002;<font color="red">&#x5F85;&#x66F4;&#x65B0;</font></p>
+<p><code>@Value</code>:&#x626B;&#x63CF;@Component&#x6CE8;&#x89E3;&#x7C7B;&#xFF0C;&#x5C06;&#x7C7B;&#x4FE1;&#x606F;&#x5B58;&#x653E;&#x5230;&#x653E;&#x5230;BeanDefinitionMap&#x4E2D;&#x53BB;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7531;spring&#x5BB9;&#x5668;&#x51C6;&#x5907;&#x5B9E;&#x4F8B;&#x5316;bean
+&#x89E6;&#x53D1;&#x5C5E;&#x6027;&#x586B;&#x5145;&#x3002;&#x586B;&#x5145;&#x903B;&#x8F91;&#x5C06;&#x5728;AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</p>
+<p><code>@Resource</code>:&#x626B;&#x63CF;@Component&#x6CE8;&#x89E3;&#x7C7B;&#xFF0C;&#x5C06;&#x7C7B;&#x4FE1;&#x606F;&#x5B58;&#x653E;&#x5230;&#x653E;&#x5230;BeanDefinitionMap&#x4E2D;&#x53BB;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7531;spring&#x5BB9;&#x5668;&#x51C6;&#x5907;&#x5B9E;&#x4F8B;&#x5316;bean
+&#x89E6;&#x53D1;&#x5C5E;&#x6027;&#x586B;&#x5145;&#x3002;&#x586B;&#x5145;&#x903B;&#x8F91;&#x5C06;&#x5728;CommonAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</p>
+<p><code>@Autowired</code>:&#x626B;&#x63CF;@Component&#x6CE8;&#x89E3;&#x7C7B;&#xFF0C;&#x5C06;&#x7C7B;&#x4FE1;&#x606F;&#x5B58;&#x653E;&#x5230;&#x653E;&#x5230;BeanDefinitionMap&#x4E2D;&#x53BB;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7531;spring&#x5BB9;&#x5668;&#x51C6;&#x5907;&#x5B9E;&#x4F8B;&#x5316;bean
+&#x89E6;&#x53D1;&#x5C5E;&#x6027;&#x586B;&#x5145;&#x3002;&#x586B;&#x5145;&#x903B;&#x8F91;&#x5C06;&#x5728;AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</p>
+<p><strong>&#x6240;&#x4EE5;@Bean&#x7C7B;&#x4E2D;&#x7684;&#x521D;&#x59CB;&#x5316;&#x6D41;&#x7A0B;&#x6162;&#x4E8E;@Value&#x5C5E;&#x6027;&#x586B;&#x5145;&#x3002;</strong></p>
+<h3 id="&#x6B63;&#x5E38;&#x60C5;&#x51B5;"><a name="&#x6B63;&#x5E38;&#x60C5;&#x51B5;" class="anchor-navigation-ex-anchor" href="#&#x6B63;&#x5E38;&#x60C5;&#x51B5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6B63;&#x5E38;&#x60C5;&#x51B5;:</h3>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5F88;&#x5E38;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#x5E73;&#x65F6;&#x4F7F;&#x7528;config&#x7C7B; &#x6CE8;&#x5165;&#x4E00;&#x4E9B;&#x5916;&#x90E8;&#x914D;&#x7F6E;&#x7C7B;&#x5982;:kafka&#x3001;redis&#x3001;dubbo&#x3001;&#x90AE;&#x7BB1;&#x4FE1;&#x606F;&#x3002;
+<img src="../jpg/&#x6B63;&#x5E38;&#x5C5E;&#x6027;&#x586B;&#x5145;&#x6D41;&#x7A0B;.jpg" alt=""></p>
+<h3 id="resource&#x5F02;&#x5E38;&#x60C5;&#x51B5;"><a name="resource&#x5F02;&#x5E38;&#x60C5;&#x51B5;" class="anchor-navigation-ex-anchor" href="#resource&#x5F02;&#x5E38;&#x60C5;&#x51B5;"><i class="fa fa-link" aria-hidden="true"></i></a>@Resource&#x5F02;&#x5E38;&#x60C5;&#x51B5;:</h3>
+<p>&#x5F53;&#x7C7B;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x5F02;&#x5E38;&#x3002;&#x8FD9;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x6BD4;&#x8F83;&#x9690;&#x79D8;&#xFF0C;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x591A;&#x7EA7;&#x4F9D;&#x8D56;&#xFF0C;&#x4E0D;&#x5BB9;&#x6613;&#x53D1;&#x73B0;&#x3002;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x914D;&#x7F6E;mq config&#x4FE1;&#x606F;&#x4F1A;&#x51FA;&#x73B0;&#x3002;</p>
+<p><img src="../jpg/@Resource&#x5F02;&#x5E38;&#x6D41;&#x7A0B;.jpg" alt=""></p>
+<p>&#x8FD9;&#x662F;&#x56E0;&#x4E3A;<code>CommonAnnotationBeanPostProcessor &#x65E9;&#x4E8E; AutowiredAnnotationBeanPostProcessor</code> Example&#x4F1A;&#x5148;&#x521D;&#x59CB;&#x5316;&#x540E;&#x518D;&#x6267;&#x884C;@Value&#x586B;&#x5145;&#x53C2;&#x6570;&#x903B;&#x8F91;&#xFF0C;&#x5BFC;&#x81F4;Example&#x53C2;&#x6570;&#x4E3A;&#x7A7A;&#x3002;</p>
+<h3 id="autowired&#x6B63;&#x5E38;&#x60C5;&#x51B5;"><a name="autowired&#x6B63;&#x5E38;&#x60C5;&#x51B5;" class="anchor-navigation-ex-anchor" href="#autowired&#x6B63;&#x5E38;&#x60C5;&#x51B5;"><i class="fa fa-link" aria-hidden="true"></i></a>@Autowired&#x6B63;&#x5E38;&#x60C5;&#x51B5;:</h3>
+<p><img src="../jpg/@Autowired&#x6B63;&#x5E38;&#x6D41;&#x7A0B;.jpg" alt=""></p>
+<h3 id="autowired&#x5F02;&#x5E38;&#x60C5;&#x51B5;"><a name="autowired&#x5F02;&#x5E38;&#x60C5;&#x51B5;" class="anchor-navigation-ex-anchor" href="#autowired&#x5F02;&#x5E38;&#x60C5;&#x51B5;"><i class="fa fa-link" aria-hidden="true"></i></a>@Autowired&#x5F02;&#x5E38;&#x60C5;&#x51B5;:</h3>
+<p><img src="../jpg/@Autowire&#x5F02;&#x5E38;&#x6D41;&#x7A0B;.jpg" alt=""></p>
+<p><code>@Value</code>&#x548C;<code>@Autowired</code> &#x90FD;&#x5C06;&#x5728;&#x586B;&#x5145;&#x903B;&#x8F91;&#x5C06;&#x5728;<code>AutowiredAnnotationBeanPostProcessor</code>&#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x5904;&#x7406;&#x903B;&#x8F91;, <code>AutowiredFieldElement.inject()</code>&#x65B9;&#x6CD5;
+AutowiredFieldElement&#x751F;&#x6210;&#x903B;&#x8F91;&#x5728;<code>AutowiredAnnotationBeanPostProcessor#findAutowiringMetadata</code>&#x4E2D;&#x6267;&#x884C;<code>AutowiredAnnotationBeanPostProcessor#buildAutowiringMetadata</code>
+&#x7136;&#x540E;&#x6839;&#x636E;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x4F9D;&#x6B21;&#x6392;&#x5E8F;&#x751F;&#x6210;<code>AutowiredFieldElement</code>&#x3002;</p>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;:</p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AutowiredAnnotationBeanPostProcessor</span> <span class="token keyword">extends</span> <span class="token class-name">InstantiationAwareBeanPostProcessorAdapter</span>
+        <span class="token keyword">implements</span> <span class="token class-name">MergedBeanDefinitionPostProcessor</span><span class="token punctuation">,</span> <span class="token class-name">PriorityOrdered</span><span class="token punctuation">,</span> <span class="token class-name">BeanFactoryAware</span> <span class="token punctuation">{</span>
+
+
+    <span class="token keyword">private</span> <span class="token class-name">InjectionMetadata</span> <span class="token function">buildAutowiringMetadata</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> clazz<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">InjectionMetadata<span class="token punctuation">.</span>InjectedElement</span><span class="token punctuation">&gt;</span></span> elements <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">InjectionMetadata<span class="token punctuation">.</span>InjectedElement</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> targetClass <span class="token operator">=</span> clazz<span class="token punctuation">;</span>
+
+        <span class="token keyword">do</span> <span class="token punctuation">{</span>
+            <span class="token keyword">final</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">InjectionMetadata<span class="token punctuation">.</span>InjectedElement</span><span class="token punctuation">&gt;</span></span> currElements <span class="token operator">=</span>
+                    <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">InjectionMetadata<span class="token punctuation">.</span>InjectedElement</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//&#x83B7;&#x53D6;&#x5B57;&#x6BB5;&#x4E0A;&#x7684;&#x6CE8;&#x89E3;</span>
+            <span class="token class-name">ReflectionUtils</span><span class="token punctuation">.</span><span class="token function">doWithLocalFields</span><span class="token punctuation">(</span>targetClass<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ReflectionUtils<span class="token punctuation">.</span>FieldCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token annotation punctuation">@Override</span>
+                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doWith</span><span class="token punctuation">(</span><span class="token class-name">Field</span> field<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">,</span> <span class="token class-name">IllegalAccessException</span> <span class="token punctuation">{</span>
+                    <span class="token comment">//&#x5FAA;&#x73AF;&#x4F9D;&#x6B21;&#x83B7;&#x53D6;&#x6CE8;&#x89E3;&#x4FE1;&#x606F;</span>
+                    <span class="token class-name">AnnotationAttributes</span> ann <span class="token operator">=</span> <span class="token function">findAutowiredAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>ann <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Modifier</span><span class="token punctuation">.</span><span class="token function">isStatic</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span><span class="token function">getModifiers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>logger<span class="token punctuation">.</span><span class="token function">isWarnEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                logger<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">&quot;Autowired annotation is not supported on static fields: &quot;</span> <span class="token operator">+</span> field<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                            <span class="token keyword">return</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">boolean</span> required <span class="token operator">=</span> <span class="token function">determineRequiredStatus</span><span class="token punctuation">(</span>ann<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        currElements<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">AutowiredFieldElement</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> required<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//&#x83B7;&#x53D6;&#x65B9;&#x6CD5;&#x4E0A;&#x7684;&#x6CE8;&#x89E3;</span>
+            <span class="token class-name">ReflectionUtils</span><span class="token punctuation">.</span><span class="token function">doWithLocalMethods</span><span class="token punctuation">(</span>targetClass<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ReflectionUtils<span class="token punctuation">.</span>MethodCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token annotation punctuation">@Override</span>
+                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doWith</span><span class="token punctuation">(</span><span class="token class-name">Method</span> method<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">,</span> <span class="token class-name">IllegalAccessException</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">Method</span> bridgedMethod <span class="token operator">=</span> <span class="token class-name">BridgeMethodResolver</span><span class="token punctuation">.</span><span class="token function">findBridgedMethod</span><span class="token punctuation">(</span>method<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">BridgeMethodResolver</span><span class="token punctuation">.</span><span class="token function">isVisibilityBridgeMethodPair</span><span class="token punctuation">(</span>method<span class="token punctuation">,</span> bridgedMethod<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token class-name">AnnotationAttributes</span> ann <span class="token operator">=</span> <span class="token function">findAutowiredAnnotation</span><span class="token punctuation">(</span>bridgedMethod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>ann <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> method<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">ClassUtils</span><span class="token punctuation">.</span><span class="token function">getMostSpecificMethod</span><span class="token punctuation">(</span>method<span class="token punctuation">,</span> clazz<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Modifier</span><span class="token punctuation">.</span><span class="token function">isStatic</span><span class="token punctuation">(</span>method<span class="token punctuation">.</span><span class="token function">getModifiers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>logger<span class="token punctuation">.</span><span class="token function">isWarnEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                logger<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">&quot;Autowired annotation is not supported on static methods: &quot;</span> <span class="token operator">+</span> method<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                            <span class="token keyword">return</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>method<span class="token punctuation">.</span><span class="token function">getParameterTypes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>logger<span class="token punctuation">.</span><span class="token function">isWarnEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                logger<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">&quot;Autowired annotation should only be used on methods with parameters: &quot;</span> <span class="token operator">+</span>
+                                        method<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">boolean</span> required <span class="token operator">=</span> <span class="token function">determineRequiredStatus</span><span class="token punctuation">(</span>ann<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token class-name">PropertyDescriptor</span> pd <span class="token operator">=</span> <span class="token class-name">BeanUtils</span><span class="token punctuation">.</span><span class="token function">findPropertyForMethod</span><span class="token punctuation">(</span>bridgedMethod<span class="token punctuation">,</span> clazz<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        currElements<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">AutowiredMethodElement</span><span class="token punctuation">(</span>method<span class="token punctuation">,</span> required<span class="token punctuation">,</span> pd<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            elements<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> currElements<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            targetClass <span class="token operator">=</span> targetClass<span class="token punctuation">.</span><span class="token function">getSuperclass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>targetClass <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> targetClass <span class="token operator">!=</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">InjectionMetadata</span><span class="token punctuation">(</span>clazz<span class="token punctuation">,</span> elements<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">AnnotationAttributes</span> <span class="token function">findAutowiredAnnotation</span><span class="token punctuation">(</span><span class="token class-name">AccessibleObject</span> ao<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ao<span class="token punctuation">.</span><span class="token function">getAnnotations</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Annotation</span><span class="token punctuation">&gt;</span></span> type <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>autowiredAnnotationTypes<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token class-name">AnnotationAttributes</span> attributes <span class="token operator">=</span> <span class="token class-name">AnnotatedElementUtils</span><span class="token punctuation">.</span><span class="token function">getMergedAnnotationAttributes</span><span class="token punctuation">(</span>ao<span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>attributes <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> attributes<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="&#x7ED3;&#x8BBA;"><a name="&#x7ED3;&#x8BBA;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BBA;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BBA;</h2>
+<blockquote>
+<p>&#x8BF4;&#x4E00;&#x4E0B;&#x4E2A;&#x4EBA;&#x7684;&#x89C1;&#x89E3;:</p>
+<ul>
+<li>&#x5982;&#x679C;&#x53EF;&#x4EE5;&#xFF0C;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;@Autowired&#x6CE8;&#x89E3;&#x628A;,&#x5982;&#x679C;&#x662F;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7684;&#x8BDD;&#xFF0C;&#x67B6;&#x6784;&#x5E08;&#x5BF9;&#x8FD9;&#x65B9;&#x9762;&#x8981;&#x6C42;&#x6709;&#x6BD4;&#x8F83;&#x4E25;&#x683C;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F1A;&#x8BA9;&#x5927;&#x5BB6;&#x4F7F;&#x7528;@Resource(name=&quot;xxx&quot;)&#x8FD9;&#x79CD;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x5C31;&#x4F1A;&#x8981;&#x6C42;&#x66F4;&#x9AD8;&#x7684;&#x6548;&#x7387;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x6548;&#x7387;&#x662F;&#x6700;&#x9AD8;&#x7684;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x6839;&#x636E;id&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x4E00;&#x6837;&#xFF0C;&#x6548;&#x7387;&#x9AD8;&#x4E00;&#x4E9B;&#x3002;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E00;&#x70B9;&#x6548;&#x7387;&#x4E0D;&#x5173;&#x7D27;&#x8981;&#x3002;</li>
+<li>bean&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x5C3D;&#x91CF;&#x6210;&#x6811;&#x5F62;&#x7ED3;&#x6784;&#xFF0C;&#x907F;&#x514D;&#x7F51;&#x72B6;&#x751F;&#x6210;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x3002;</li>
+<li>bean&#x4F9D;&#x8D56;&#x5C42;&#x7EA7;&#x5C3D;&#x91CF;&#x4E0D;&#x8981;&#x8D85;&#x8FC7;&#x56DB;&#x5C42;&#xFF0C;&#x4E00;&#x65E6;&#x94FE;&#x8DEF;&#x8FC7;&#x957F;&#xFF0C;&#x5C5E;&#x6027;&#x586B;&#x5145;&#x5BFC;&#x5165;&#x65F6;&#xFF0C;&#x98CE;&#x9669;&#x548C;bug&#x4E5F;&#x5C06;&#x9010;&#x6B65;&#x63D0;&#x5347;&#xFF0C;&#x4E14;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x4E0D;&#x597D;&#x6392;&#x67E5;&#x539F;&#x56E0;&#x3002;</li>
+<li>&#x5148;&#x5199;@Autowired &#x518D;&#x5199;@Value</li>
+</ul>
+</blockquote>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/diyiyao" target="_blank">diyiyao</a>&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">&#x77E5;&#x8BC6;&#x5171;&#x4EAB; &#x7F72;&#x540D;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2021-04-13 03:40:54 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="@Resource和@Autowired的区别.html" class="navigation navigation-prev " aria-label="Previous page: @Resource和@Autowired的区别">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Spring源码之@Component注解解析.html" class="navigation navigation-next " aria-label="Next page: Spring源码之@Component注解解析">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"@Resource、@Autowired、@Value的循环依赖","level":"1.5.3.2","depth":3,"next":{"title":"Spring源码之@Component注解解析","level":"1.5.3.3","depth":3,"path":"blogs/spring/Spring源码之@Component注解解析.md","ref":"blogs/spring/Spring源码之@Component注解解析.md","articles":[]},"previous":{"title":"@Resource和@Autowired的区别","level":"1.5.3.1","depth":3,"path":"blogs/spring/@Resource和@Autowired的区别.md","ref":"blogs/spring/@Resource和@Autowired的区别.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","disqus","github-buttons","editlink","ga","-highlight","prism","bibtex-indexed-cite","anchor-navigation-ex","page-footer-ex","splitter","todo","copy-code-button","expandable-chapters-small","donate"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"ignore":["mermaid","eval-js"],"css":["prismjs/themes/prism-solarizedlight.css"]},"disqus":{"useIdentifier":false,"shortName":"https-diyiyao-github-io-mybook"},"editlink":{"label":"Edit","multilingual":false,"base":"https://github.com/diyiyao/mybook/edit/main/"},"todo":{},"page-footer-ex":{"copyright":"By [diyiyao](https://github.com/diyiyao)，使用[知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"donate":{"alipay":"","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"bibtex-indexed-cite":{"path":"/"},"github-buttons":{"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-131910384-3"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"bibCount":0,"variables":{},"title":"title","bib":[],"gitbook":"*"},"file":{"path":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","mtime":"2021-04-13T03:40:54.177Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-13T03:41:42.921Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

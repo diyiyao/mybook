@@ -1,0 +1,701 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>snowflake时间回退问题 · title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-solarizedlight.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-bibtex-indexed-cite/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="directory.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../intro/">
+            
+                <a href="../../intro/">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../tools/directory.html">
+            
+                <a href="../../tools/directory.html">
+            
+                    
+                    工具类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../tools/GitBook.html">
+            
+                <a href="../../tools/GitBook.html">
+            
+                    
+                    GitBook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../tools/Markdown.html">
+            
+                <a href="../../tools/Markdown.html">
+            
+                    
+                    Markdown
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../works/directory.html">
+            
+                <a href="../../works/directory.html">
+            
+                    
+                    工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../works/付款单模型.html">
+            
+                <a href="../../works/付款单模型.html">
+            
+                    
+                    付款单模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../works/常用命令/directory.html">
+            
+                <a href="../../works/常用命令/directory.html">
+            
+                    
+                    常用命令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../works/常用命令/curl的用法指南.html">
+            
+                <a href="../../works/常用命令/curl的用法指南.html">
+            
+                    
+                    curl的用法指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../blogs/directory.html">
+            
+                <a href="../../blogs/directory.html">
+            
+                    
+                    博客
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../blogs/DDD/directory.html">
+            
+                <a href="../../blogs/DDD/directory.html">
+            
+                    
+                    DDD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../blogs/DDD/微服务代码模型.html">
+            
+                <a href="../../blogs/DDD/微服务代码模型.html">
+            
+                    
+                    微服务代码模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../../blogs/DDD/资金认领的实践.html">
+            
+                <a href="../../blogs/DDD/资金认领的实践.html">
+            
+                    
+                    资金认领的实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../blogs/git/directory.html">
+            
+                <a href="../../blogs/git/directory.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../blogs/git/git发布流程.html">
+            
+                <a href="../../blogs/git/git发布流程.html">
+            
+                    
+                    git发布流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../blogs/spring/directory.html">
+            
+                <a href="../../blogs/spring/directory.html">
+            
+                    
+                    spring
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../blogs/spring/@Resource和@Autowired的区别.html">
+            
+                <a href="../../blogs/spring/@Resource和@Autowired的区别.html">
+            
+                    
+                    @Resource和@Autowired的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../blogs/spring/@Resource、@Autowired、@Value的循环依赖.html">
+            
+                <a href="../../blogs/spring/@Resource、@Autowired、@Value的循环依赖.html">
+            
+                    
+                    @Resource、@Autowired、@Value的循环依赖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../../blogs/spring/Spring源码之@Component注解解析.html">
+            
+                <a href="../../blogs/spring/Spring源码之@Component注解解析.html">
+            
+                    
+                    Spring源码之@Component注解解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../directory.html">
+            
+                <a href="../directory.html">
+            
+                    
+                    问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../springboot/directory.html">
+            
+                <a href="../springboot/directory.html">
+            
+                    
+                    springboot
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../springboot/数据源配置问题.html">
+            
+                <a href="../springboot/数据源配置问题.html">
+            
+                    
+                    数据源配置问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="directory.html">
+            
+                <a href="directory.html">
+            
+                    
+                    java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.2.1" data-path="snowflake时间回退.html">
+            
+                <a href="snowflake时间回退.html">
+            
+                    
+                    snowflake时间回退问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >snowflake时间回退问题</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;"><b></b>snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;</a></li></ul></div><a href="#snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;"><a name="snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;" class="anchor-navigation-ex-anchor" href="#snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;"><i class="fa fa-link" aria-hidden="true"></i></a>snowflake&#x65F6;&#x95F4;&#x56DE;&#x9000;</h1>
+<p>&#x65F6;&#x95F4;&#x6821;&#x51C6;&#xFF0C;&#x4EE5;&#x53CA;&#x5176;&#x4ED6;&#x56E0;&#x7D20;&#xFF0C;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x670D;&#x52A1;&#x5668;&#x65F6;&#x95F4;&#x56DE;&#x9000;&#xFF08;&#x65F6;&#x95F4;&#x5411;&#x524D;&#x5FEB;&#x8FDB;&#x4E0D;&#x4F1A;&#x6709;&#x95EE;&#x9898;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x6070;&#x5DE7;&#x56DE;&#x9000;&#x524D;&#x751F;&#x6210;&#x8FC7;&#x4E00;&#x4E9B;ID&#xFF0C;&#x800C;&#x65F6;&#x95F4;&#x56DE;&#x9000;&#x540E;&#xFF0C;&#x751F;&#x6210;&#x7684;ID&#x5C31;&#x6709;&#x53EF;&#x80FD;&#x91CD;&#x590D;&#x3002;&#x5B98;&#x65B9;&#x5BF9;&#x4E8E;&#x6B64;&#x5E76;&#x6CA1;&#x6709;&#x7ED9;&#x51FA;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x800C;&#x662F;&#x7B80;&#x5355;&#x7684;&#x629B;&#x9519;&#x5904;&#x7406;&#xFF0C;&#x8FD9;&#x6837;&#x4F1A;&#x9020;&#x6210;&#x5728;&#x65F6;&#x95F4;&#x88AB;&#x8FFD;&#x56DE;&#x4E4B;&#x524D;&#x7684;&#x8FD9;&#x6BB5;&#x65F6;&#x95F4;&#x670D;&#x52A1;&#x4E0D;&#x53EF;&#x7528;&#x3002;</p>
+<pre class="language-"><code>//&#x5982;&#x679C;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x5C0F;&#x4E8E;&#x4E0A;&#x4E00;&#x6B21;ID&#x751F;&#x6210;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x8BF4;&#x660E;&#x7CFB;&#x7EDF;&#x65F6;&#x949F;&#x56DE;&#x9000;&#x8FC7;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5E94;&#x5F53;&#x629B;&#x51FA;&#x5F02;&#x5E38;
+    if (timestamp &lt; lastTimestamp) {
+        throw new RuntimeException(
+                String.format(&quot;Clock moved backwards.  Refusing to generate id for %d milliseconds&quot;, lastTimestamp - timestamp));
+    }
+    //&#x5982;&#x679C;&#x662F;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;
+    if (lastTimestamp == timestamp) {
+        sequence = (sequence + 1) &amp; sequenceMask;
+        //&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;&#x6EA2;&#x51FA;
+        if (sequence == 0) {
+            //&#x963B;&#x585E;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x6BEB;&#x79D2;,&#x83B7;&#x5F97;&#x65B0;&#x7684;&#x65F6;&#x95F4;&#x6233;
+            timestamp = tilNextMillis(lastTimestamp);
+        }
+    }
+</code></pre><p>&#x4FEE;&#x6539;&#x540E;</p>
+<pre class="language-"><code>    //&#x5982;&#x679C;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x5C0F;&#x4E8E;&#x4E0A;&#x4E00;&#x6B21;ID&#x751F;&#x6210;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x8BF4;&#x660E;&#x7CFB;&#x7EDF;&#x65F6;&#x949F;&#x56DE;&#x9000;&#x8FC7;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5E94;&#x5F53;&#x629B;&#x51FA;&#x5F02;&#x5E38;
+    if (timestamp &lt; lastTimestamp) {
+        //&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x673A;&#x5668;&#x7801;
+        //&#x673A;&#x5668;&#x7801;&#x4E00;&#x5171;4&#x4F4D; &#x5DE5;&#x4F5C;&#x673A;&#x5668;ID(0~31) &#x5047;&#x8BBE;&#x7CFB;&#x7EDF;&#x6700;&#x5927;&#x5206;&#x5E03;&#x5F0F;&#x673A;&#x5668;&#x4E2A;&#x6570;&#x4E3A;16(0-15)
+        //&#x5F53;&#x7CFB;&#x7EDF;&#x51FA;&#x73B0;&#x65F6;&#x95F4;&#x56DE;&#x9000; &#x4F7F;&#x7528;&#x4E0B;&#x4E00;&#x7EC4;&#x673A;&#x5668;ID = &#x539F;&#x673A;&#x5668;ID + 16
+        Long workerNewId = workerId + 16
+
+        //&#x5982;&#x679C;&#x662F;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;
+        if (oldLastTimestamp == timestamp) {
+            sequence = (sequence + 1) &amp; sequenceMask;
+            //&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;&#x6EA2;&#x51FA;
+            if (sequence == 0) {
+                //&#x963B;&#x585E;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x6BEB;&#x79D2;,&#x83B7;&#x5F97;&#x65B0;&#x7684;&#x65F6;&#x95F4;&#x6233;
+                timestamp = tilNextMillis(oldLastTimestamp);
+            }
+        }
+        //&#x65F6;&#x95F4;&#x6233;&#x6539;&#x53D8;&#xFF0C;&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;&#x91CD;&#x7F6E;
+        else {
+            sequence = 0L;
+        }
+
+        oldLastTimestamp = timestamp;
+        //&#x79FB;&#x4F4D;&#x5E76;&#x901A;&#x8FC7;&#x6216;&#x8FD0;&#x7B97;&#x62FC;&#x5230;&#x4E00;&#x8D77;&#x7EC4;&#x6210;64&#x4F4D;&#x7684;ID
+        return ((timestamp - twepoch) &lt;&lt; timestampLeftShift)
+                | (dataCenterId &lt;&lt; dataCenterIdShift)
+                | (workerNewId &lt;&lt; workerIdShift)
+                | sequence;
+    }
+
+    //&#x5982;&#x679C;&#x662F;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;
+    if (lastTimestamp == timestamp) {
+        sequence = (sequence + 1) &amp; sequenceMask;
+        //&#x6BEB;&#x79D2;&#x5185;&#x5E8F;&#x5217;&#x6EA2;&#x51FA;
+        if (sequence == 0) {
+            //&#x963B;&#x585E;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x6BEB;&#x79D2;,&#x83B7;&#x5F97;&#x65B0;&#x7684;&#x65F6;&#x95F4;&#x6233;
+            timestamp = tilNextMillis(lastTimestamp);
+        }
+    }
+</code></pre><footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/diyiyao" target="_blank">diyiyao</a>&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">&#x77E5;&#x8BC6;&#x5171;&#x4EAB; &#x7F72;&#x540D;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2021-04-13 03:40:54 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="directory.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: java">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"snowflake时间回退问题","level":"1.6.2.1","depth":3,"previous":{"title":"java","level":"1.6.2","depth":2,"path":"question/java/directory.md","ref":"question/java/directory.md","articles":[{"title":"snowflake时间回退问题","level":"1.6.2.1","depth":3,"path":"question/java/snowflake时间回退.md","ref":"question/java/snowflake时间回退.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","disqus","github-buttons","editlink","ga","-highlight","prism","bibtex-indexed-cite","anchor-navigation-ex","page-footer-ex","splitter","todo","copy-code-button","expandable-chapters-small","donate"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"ignore":["mermaid","eval-js"],"css":["prismjs/themes/prism-solarizedlight.css"]},"disqus":{"useIdentifier":false,"shortName":"https-diyiyao-github-io-mybook"},"editlink":{"label":"Edit","multilingual":false,"base":"https://github.com/diyiyao/mybook/edit/main/"},"todo":{},"page-footer-ex":{"copyright":"By [diyiyao](https://github.com/diyiyao)，使用[知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"donate":{"alipay":"","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"bibtex-indexed-cite":{"path":"/"},"github-buttons":{"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-131910384-3"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"bibCount":0,"variables":{},"title":"title","bib":[],"gitbook":"*"},"file":{"path":"question/java/snowflake时间回退.md","mtime":"2021-04-13T03:40:54.177Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-13T03:41:42.921Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

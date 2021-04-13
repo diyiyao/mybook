@@ -1,0 +1,750 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>@Resource和@Autowired的区别 · title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-solarizedlight.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-bibtex-indexed-cite/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="@Resource、@Autowired、@Value的循环依赖.html" />
+    
+    
+    <link rel="prev" href="directory.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../intro/">
+            
+                <a href="../../intro/">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../tools/directory.html">
+            
+                <a href="../../tools/directory.html">
+            
+                    
+                    工具类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../tools/GitBook.html">
+            
+                <a href="../../tools/GitBook.html">
+            
+                    
+                    GitBook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../tools/Markdown.html">
+            
+                <a href="../../tools/Markdown.html">
+            
+                    
+                    Markdown
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../works/directory.html">
+            
+                <a href="../../works/directory.html">
+            
+                    
+                    工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../works/付款单模型.html">
+            
+                <a href="../../works/付款单模型.html">
+            
+                    
+                    付款单模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../works/常用命令/directory.html">
+            
+                <a href="../../works/常用命令/directory.html">
+            
+                    
+                    常用命令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../works/常用命令/curl的用法指南.html">
+            
+                <a href="../../works/常用命令/curl的用法指南.html">
+            
+                    
+                    curl的用法指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../directory.html">
+            
+                <a href="../directory.html">
+            
+                    
+                    博客
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../DDD/directory.html">
+            
+                <a href="../DDD/directory.html">
+            
+                    
+                    DDD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../DDD/微服务代码模型.html">
+            
+                <a href="../DDD/微服务代码模型.html">
+            
+                    
+                    微服务代码模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../DDD/资金认领的实践.html">
+            
+                <a href="../DDD/资金认领的实践.html">
+            
+                    
+                    资金认领的实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../git/directory.html">
+            
+                <a href="../git/directory.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../git/git发布流程.html">
+            
+                <a href="../git/git发布流程.html">
+            
+                    
+                    git发布流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="directory.html">
+            
+                <a href="directory.html">
+            
+                    
+                    spring
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.3.1" data-path="@Resource和@Autowired的区别.html">
+            
+                <a href="@Resource和@Autowired的区别.html">
+            
+                    
+                    @Resource和@Autowired的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="@Resource、@Autowired、@Value的循环依赖.html">
+            
+                <a href="@Resource、@Autowired、@Value的循环依赖.html">
+            
+                    
+                    @Resource、@Autowired、@Value的循环依赖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="Spring源码之@Component注解解析.html">
+            
+                <a href="Spring源码之@Component注解解析.html">
+            
+                    
+                    Spring源码之@Component注解解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../question/directory.html">
+            
+                <a href="../../question/directory.html">
+            
+                    
+                    问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../question/springboot/directory.html">
+            
+                <a href="../../question/springboot/directory.html">
+            
+                    
+                    springboot
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../question/springboot/数据源配置问题.html">
+            
+                <a href="../../question/springboot/数据源配置问题.html">
+            
+                    
+                    数据源配置问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../question/java/directory.html">
+            
+                <a href="../../question/java/directory.html">
+            
+                    
+                    java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../question/java/snowflake时间回退.html">
+            
+                <a href="../../question/java/snowflake时间回退.html">
+            
+                    
+                    snowflake时间回退问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >@Resource和@Autowired的区别</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#resource&#x548C;autowired&#x7684;&#x533A;&#x522B;"><b></b>@Resource&#x548C;@Autowired&#x7684;&#x533A;&#x522B;</a></li></ul></div><a href="#resource&#x548C;autowired&#x7684;&#x533A;&#x522B;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="resource&#x548C;autowired&#x7684;&#x533A;&#x522B;"><a name="resource&#x548C;autowired&#x7684;&#x533A;&#x522B;" class="anchor-navigation-ex-anchor" href="#resource&#x548C;autowired&#x7684;&#x533A;&#x522B;"><i class="fa fa-link" aria-hidden="true"></i></a>@Resource&#x548C;@Autowired&#x7684;&#x533A;&#x522B;</h1>
+<p>@Resource&#x548C;@Autowired&#x4E24;&#x4E2A;&#x6CE8;&#x89E3;&#x5927;&#x5BB6;&#x5E94;&#x8BE5;&#x5F88;&#x719F;&#x6089;&#xFF0C;&#x5728;spring&#x4E2D;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x4F7F;&#x7528;@Resource&#x548C;@Autowired&#x505A;bean&#x7684;&#x6CE8;&#x5165;&#x65F6;&#x4F7F;&#x7528;&#x3002;&#x6709;&#x7684;&#x65F6;&#x5019;&#x5B83;&#x4EEC;&#x662F;&#x7B49;&#x4EF7;&#x7684;&#xFF0C;&#x4F7F;&#x7528;&#x54EA;&#x4E2A;&#x90FD;&#x53EF;&#x4EE5;&#x3002;&#x4F46;&#x6709;&#x7684;&#x65F6;&#x5019;&#x5219;&#x4E0D;&#x53EF;&#x4EE5;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x770B;&#x770B;&#x4ED6;&#x4EEC;&#x7684;&#x533A;&#x522B;&#x5427;&#x3002;</p>
+<blockquote>
+<p>&#x76F8;&#x540C;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>spring&#x4E2D;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x6CE8;&#x5165;bean&#xFF0C;&#x540C;&#x65F6;&#x90FD;&#x8FD8;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x6CE8;&#x5165;&#x5C5E;&#x6027;&#x7684;&#x4FEE;&#x9970;&#x3002;&#x5728;&#x63A5;&#x53E3;&#x4EC5;&#x6709;&#x5355;&#x4E00;&#x5B9E;&#x73B0;&#x7C7B;&#x65F6;&#xFF0C;&#x4E24;&#x4E2A;&#x6CE8;&#x89E3;&#x7684;&#x4FEE;&#x9970;&#x6548;&#x679C;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x4ED6;&#x4EEC;&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x76F8;&#x4E92;&#x66FF;&#x6362;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x4F7F;&#x7528;&#x3002;</li>
+</ul>
+<p>&#x4E0D;&#x540C;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>@Resource&#x662F;Java&#x81EA;&#x5DF1;&#x7684;&#x6CE8;&#x89E3;&#xFF0C;@Resource&#x6709;&#x4E24;&#x4E2A;&#x4E3B;&#x8981;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5206;&#x522B;&#x662F;name&#x548C;type&#xFF1B;spring&#x5BF9;@Resource&#x6CE8;&#x89E3;&#x7684;name&#x5C5E;&#x6027;&#x89E3;&#x6790;&#x4E3A;bean&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x800C;type&#x5C5E;&#x6027;&#x5219;&#x89E3;&#x6790;&#x4E3A;bean&#x7684;&#x7C7B;&#x578B;&#x3002;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x4F7F;&#x7528;name&#x5C5E;&#x6027;&#xFF0C;&#x5219;&#x4F7F;&#x7528;byName&#x7684;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x7B56;&#x7565;&#x3002;&#x800C;&#x4F7F;&#x7528;type&#x5C5E;&#x6027;&#xFF0C;&#x5219;&#x662F;&#x4F7F;&#x7528;byType&#x7684;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x7B56;&#x7565;&#x3002;&#x5982;&#x679C;&#x65E2;&#x4E0D;&#x6307;&#x5B9A;name&#x5C5E;&#x6027;&#x4E5F;&#x4E0D;&#x6307;&#x5B9A;type&#x5C5E;&#x6027;&#xFF0C;&#x8FD9;&#x65F6;&#x5C06;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x4F7F;&#x7528;byName&#x7684;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x7B56;&#x7565;&#x3002;</li>
+<li>@Autowired&#x662F;spring&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x662F;spring2.5&#x7248;&#x672C;&#x5F15;&#x5165;&#x7684;&#xFF0C;@Autowired&#x6CE8;&#x89E3;&#x53EA;&#x6839;&#x636E;type&#x8FDB;&#x884C;&#x6CE8;&#x5165;&#xFF0C;&#x4E0D;&#x4F1A;&#x53BB;&#x5339;&#x914D;name&#x3002;&#x5982;&#x679C;&#x6D89;&#x53CA;&#x5230;&#x6839;&#x636E;type&#x65E0;&#x6CD5;&#x8FA8;&#x522B;&#x7684;&#x6CE8;&#x5165;&#x5BF9;&#x8C61;&#xFF0C;&#x5C06;&#x9700;&#x8981;&#x4F9D;&#x8D56;@Qualifier&#x6216;@Primary&#x6CE8;&#x89E3;&#x4E00;&#x8D77;&#x6765;&#x4FEE;&#x9970;&#x3002;</li>
+<li>@Resource&#x5728;Spring&#x586B;&#x5145;&#x65F6;&#x673A;&#x662F;&#x4EA4;&#x7531;org.springframework.context.annotation.CommonAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</li>
+<li>@Autowired&#x5728;Spring&#x586B;&#x5145;&#x65F6;&#x673A;&#x662F;&#x4EA4;&#x7531;org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor#postProcessPropertyValues&#x65B9;&#x6CD5;</li>
+</ul>
+</blockquote>
+<p>&#x4E0A;&#x9762;&#x76F8;&#x540C;&#x70B9;&#x91CC;&#x9762;&#x8BF4;&#x5230;&#xFF0C;&#x5982;&#x679C;&#x63A5;&#x53E3;&#x4EC5;&#x6709;&#x5355;&#x4E00;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E8C;&#x8005;&#x7684;&#x4FEE;&#x9970;&#x6548;&#x679C;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x90A3;&#x5982;&#x679C;&#x63A5;&#x53E3;&#x6709;&#x4E24;&#x4E2A;&#x6216;&#x8005;&#x4E24;&#x4E2A;&#x4EE5;&#x4E0A;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x5462;&#xFF1F;&#xFF1F;&#xFF1F;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;</p>
+<pre class="language-"><code class="lang-java"><span class="token comment">//&#x9996;&#x5148;&#x5199;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Human</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * &#x8DD1;&#x9A6C;&#x62C9;&#x677E;
+     * @return
+     */</span>
+    <span class="token class-name">String</span> <span class="token function">runMarathon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//&#x63A5;&#x53E3;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;</span>
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Man</span> <span class="token keyword">implements</span> <span class="token class-name">Human</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">runMarathon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;A man run marathon&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//&#x63A5;&#x53E3;&#x7684;&#x8C03;&#x7528;</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/an&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HumanController</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Resource</span>
+    <span class="token keyword">private</span> <span class="token class-name">Human</span> human<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/run&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">runMarathon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> human<span class="token punctuation">.</span><span class="token function">runMarathon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4F7F;&#x7528;&#x7684;&#x662F;@Resource&#x6CE8;&#x89E3;&#xFF0C;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x3002;&#x5982;&#x679C;&#x6362;&#x6210;@Autowired&#x6CE8;&#x89E3;&#xFF0C;&#x6548;&#x679C;&#x4E5F;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8FD0;&#x884C;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5728;&#x7ED9;&#x63A5;&#x53E3;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;</p>
+<pre class="language-"><code class="lang-java"><span class="token comment">//&#x63A5;&#x53E3;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;</span>
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Woman</span> <span class="token keyword">implements</span> <span class="token class-name">Human</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">runMarathon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;An woman run marathon&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>1&#x3001;&#x63A7;&#x5236;&#x7C7B;&#x91CC;&#x9762;&#x5982;&#x679C;&#x4F7F;&#x7528;@Resource&#x6CE8;&#x89E3;&#xFF0C;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x6838;&#x5FC3;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;humanController&apos;: Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type &apos;com.example.demo1.Human&apos; available: expected single matching bean but found 2: man,woman
+</code></pre><p>&#x8FD9;&#x662F;&#x6211;&#x4EEC;&#x5C31;&#x8981;&#x501F;&#x52A9;@Resource&#x6CE8;&#x89E3;&#x7684;name&#x5C5E;&#x6027;&#x6216;&#x8005;@Qualifier&#x6765;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x5408;&#x683C;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;
+&#x53EA;&#x9700;&#x8981;&#x5C06;&#x63A7;&#x5236;&#x7C7B;&#x91CC;&#x9762;&#x7684;&#x6CE8;&#x89E3;&#x6539;&#x4E3A;&#x5982;&#x4E0B;&#x5373;&#x53EF;&#xFF1A;</p>
+<pre class="language-"><code>    @Resource(name=&quot;woman&quot;)
+    private Human human;
+    //&#x6216;&#x8005;
+    @Resource
+    @Qualifier(&quot;woman&quot;)
+    private Human human;
+</code></pre><p>2&#x3001;&#x63A7;&#x5236;&#x7C7B;&#x91CC;&#x9762;&#x5982;&#x679C;&#x4F7F;&#x7528;@Autowired&#x6CE8;&#x89E3;&#xFF0C;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code>Description:
+
+Field human in com.example.demo1.HumanController required a single bean, but 2 were found:
+    - man: defined in file [/Users/yangdeke/IdeaProjects/test/demo1/target/classes/com/example/demo1/Man.class]
+    - woman: defined in file [/Users/yangdeke/IdeaProjects/test/demo1/target/classes/com/example/demo1/Woman.class]
+
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+</code></pre><p>&#x62A5;&#x9519;&#x4FE1;&#x606F;&#x5F88;&#x660E;&#x663E;&#xFF0C;HumanController&#x9700;&#x8981;&#x4E00;&#x4E2A;bean&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x662F;&#x627E;&#x5230;&#x4E86;&#x4E24;&#x4E2A; man &#x548C;woman</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x4F7F;&#x7528;@Primary&#x6CE8;&#x89E3;&#xFF0C;&#x5728;&#x6709;&#x591A;&#x4E2A;&#x5B9E;&#x73B0;bean&#x65F6;&#x544A;&#x8BC9;spring&#x9996;&#x5148;@Primary&#x4FEE;&#x9970;&#x7684;&#x90A3;&#x4E2A;&#xFF1B;&#x6216;&#x8005;&#x4F7F;&#x7528;@Qualifier&#x6765;&#x6807;&#x6CE8;&#x9700;&#x8981;&#x6CE8;&#x5165;&#x7684;&#x7C7B;&#x3002;</p>
+<p>@Qualifier&#x4FEE;&#x6539;&#x65B9;&#x5F0F;&#x4E0E;&#x6539;&#x52A8;&#x4E8C;&#x7684;&#x76F8;&#x540C;&#xFF0C;&#x4F9D;&#x7136;&#x662F;&#x4FEE;&#x6539;HumanController.java &#x4E2D;&#x95F4;&#x6CE8;&#x5165;&#x7684;Human&#x4E0A;&#x9762;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x518D;&#x590D;&#x8FF0;</p>
+<p>@Primary&#x662F;&#x4FEE;&#x9970;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#xFF0C;&#x544A;&#x8BC9;spring&#xFF0C;&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;&#x65F6;&#xFF0C;&#x4F18;&#x5148;&#x6CE8;&#x5165;&#x88AB;@Primary&#x6CE8;&#x89E3;&#x4FEE;&#x9970;&#x7684;&#x90A3;&#x4E2A;&#x3002;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x6CE8;&#x5165;Man.java &#xFF0C;&#x90A3;&#x4E48;&#x4FEE;&#x6539;Man.java&#x4E3A;&#x5982;&#x4E0B;&#x60C5;&#x51B5;</p>
+<pre class="language-"><code class="lang-java">
+<span class="token annotation punctuation">@Service</span>
+<span class="token annotation punctuation">@Primary</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Man</span> <span class="token keyword">implements</span> <span class="token class-name">Human</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">runMarathon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;A man run marathon&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x7684;&#x6848;&#x4F8B;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5F88;&#x660E;&#x663E;&#x7684;&#x770B;&#x51FA;&#x6765;&#x4ED6;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x533A;&#x522B;&#x4E86;&#x3002;&#x540C;&#x65F6;&#x9047;&#x5230;&#x95EE;&#x9898;&#x4E5F;&#x77E5;&#x9053;&#x8BE5;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x4E86;&#x3002;</p>
+<p>&#x63A8;&#x8350;&#x4F7F;&#x7528;&#xFF1A;@Resource&#x6CE8;&#x89E3;&#x5728;&#x5B57;&#x6BB5;&#x4E0A;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x4E0D;&#x7528;&#x5199;setter&#x65B9;&#x6CD5;&#x4E86;&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x6CE8;&#x89E3;&#x662F;&#x5C5E;&#x4E8E;J2EE&#x7684;&#xFF0C;&#x51CF;&#x5C11;&#x4E86;&#x4E0E;spring&#x7684;&#x8026;&#x5408;&#x3002;&#x8FD9;&#x6837;&#x4EE3;&#x7801;&#x770B;&#x8D77;&#x5C31;&#x6BD4;&#x8F83;&#x4F18;&#x96C5;</p>
+<p>&#x6700;&#x540E;&#x5462;&#xFF0C;&#x8BF4;&#x4E00;&#x4E0B;&#x4E2A;&#x4EBA;&#x7684;&#x89C1;&#x89E3;&#xFF0C;&#x5E73;&#x65F6;&#x7684;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#x5462;&#xFF0C;&#x66F4;&#x5E38;&#x7528;&#x7684;&#x662F;@Autowired&#x6CE8;&#x89E3;&#xFF0C;&#x56E0;&#x4E3A;&#x5E73;&#x65F6;&#x767E;&#x5206;&#x4E4B;&#x4E5D;&#x5341;&#x4EE5;&#x4E0A;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x6240;&#x4EE5;&#x7528;@Autowired&#x6BD4;&#x8F83;&#x65B9;&#x4FBF;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x7528;&#x4E24;&#x4E2A;&#x4E2D;&#x7684;&#x54EA;&#x4E00;&#x4E2A;&#x90FD;&#x4E00;&#x6837;&#xFF0C;&#x6CA1;&#x4EC0;&#x4E48;&#x592A;&#x5927;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x7EAF;&#x5C5E;&#x4E2A;&#x4EBA;&#x4E60;&#x60EF;&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;&#x662F;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7684;&#x8BDD;&#xFF0C;&#x67B6;&#x6784;&#x5E08;&#x5BF9;&#x8FD9;&#x65B9;&#x9762;&#x8981;&#x6C42;&#x6709;&#x6BD4;&#x8F83;&#x4E25;&#x683C;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F1A;&#x8BA9;&#x5927;&#x5BB6;&#x4F7F;&#x7528;@Resource(name=&quot;xxx&quot;)&#x8FD9;&#x79CD;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x5C31;&#x4F1A;&#x8981;&#x6C42;&#x66F4;&#x9AD8;&#x7684;&#x6548;&#x7387;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x6548;&#x7387;&#x662F;&#x6700;&#x9AD8;&#x7684;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x6839;&#x636E;id&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x4E00;&#x6837;&#xFF0C;&#x6548;&#x7387;&#x9AD8;&#x4E00;&#x4E9B;&#x3002;&#x6240;&#x4EE5;&#x6839;&#x636E;&#x4E2A;&#x4EBA;&#x60C5;&#x51B5;&#xFF0C;&#x9009;&#x62E9;&#x6027;&#x4F7F;&#x7528;&#x5427;&#x3002;&#x3002;&#x3002;</p>
+<p>&#x94FE;&#x63A5;&#xFF1A;<a href="https://www.jianshu.com/p/e4a899bfd18b" target="_blank">https://www.jianshu.com/p/e4a899bfd18b</a></p>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/diyiyao" target="_blank">diyiyao</a>&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">&#x77E5;&#x8BC6;&#x5171;&#x4EAB; &#x7F72;&#x540D;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2021-04-13 03:40:54 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="directory.html" class="navigation navigation-prev " aria-label="Previous page: spring">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="@Resource、@Autowired、@Value的循环依赖.html" class="navigation navigation-next " aria-label="Next page: @Resource、@Autowired、@Value的循环依赖">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"@Resource和@Autowired的区别","level":"1.5.3.1","depth":3,"next":{"title":"@Resource、@Autowired、@Value的循环依赖","level":"1.5.3.2","depth":3,"path":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","ref":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","articles":[]},"previous":{"title":"spring","level":"1.5.3","depth":2,"path":"blogs/spring/directory.md","ref":"blogs/spring/directory.md","articles":[{"title":"@Resource和@Autowired的区别","level":"1.5.3.1","depth":3,"path":"blogs/spring/@Resource和@Autowired的区别.md","ref":"blogs/spring/@Resource和@Autowired的区别.md","articles":[]},{"title":"@Resource、@Autowired、@Value的循环依赖","level":"1.5.3.2","depth":3,"path":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","ref":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","articles":[]},{"title":"Spring源码之@Component注解解析","level":"1.5.3.3","depth":3,"path":"blogs/spring/Spring源码之@Component注解解析.md","ref":"blogs/spring/Spring源码之@Component注解解析.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","disqus","github-buttons","editlink","ga","-highlight","prism","bibtex-indexed-cite","anchor-navigation-ex","page-footer-ex","splitter","todo","copy-code-button","expandable-chapters-small","donate"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"ignore":["mermaid","eval-js"],"css":["prismjs/themes/prism-solarizedlight.css"]},"disqus":{"useIdentifier":false,"shortName":"https-diyiyao-github-io-mybook"},"editlink":{"label":"Edit","multilingual":false,"base":"https://github.com/diyiyao/mybook/edit/main/"},"todo":{},"page-footer-ex":{"copyright":"By [diyiyao](https://github.com/diyiyao)，使用[知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"donate":{"alipay":"","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"bibtex-indexed-cite":{"path":"/"},"github-buttons":{"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-131910384-3"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"bibCount":0,"variables":{},"title":"title","bib":[],"gitbook":"*"},"file":{"path":"blogs/spring/@Resource和@Autowired的区别.md","mtime":"2021-04-13T03:40:54.177Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-13T03:41:42.921Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

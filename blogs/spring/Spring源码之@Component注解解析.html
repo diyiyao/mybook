@@ -1,0 +1,744 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Spring源码之@Component注解解析 · title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-solarizedlight.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-bibtex-indexed-cite/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../question/directory.html" />
+    
+    
+    <link rel="prev" href="@Resource、@Autowired、@Value的循环依赖.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../intro/">
+            
+                <a href="../../intro/">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../tools/directory.html">
+            
+                <a href="../../tools/directory.html">
+            
+                    
+                    工具类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../tools/GitBook.html">
+            
+                <a href="../../tools/GitBook.html">
+            
+                    
+                    GitBook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../tools/Markdown.html">
+            
+                <a href="../../tools/Markdown.html">
+            
+                    
+                    Markdown
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../works/directory.html">
+            
+                <a href="../../works/directory.html">
+            
+                    
+                    工作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../works/付款单模型.html">
+            
+                <a href="../../works/付款单模型.html">
+            
+                    
+                    付款单模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../works/常用命令/directory.html">
+            
+                <a href="../../works/常用命令/directory.html">
+            
+                    
+                    常用命令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../works/常用命令/curl的用法指南.html">
+            
+                <a href="../../works/常用命令/curl的用法指南.html">
+            
+                    
+                    curl的用法指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../directory.html">
+            
+                <a href="../directory.html">
+            
+                    
+                    博客
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../DDD/directory.html">
+            
+                <a href="../DDD/directory.html">
+            
+                    
+                    DDD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../DDD/微服务代码模型.html">
+            
+                <a href="../DDD/微服务代码模型.html">
+            
+                    
+                    微服务代码模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../DDD/资金认领的实践.html">
+            
+                <a href="../DDD/资金认领的实践.html">
+            
+                    
+                    资金认领的实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../git/directory.html">
+            
+                <a href="../git/directory.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../git/git发布流程.html">
+            
+                <a href="../git/git发布流程.html">
+            
+                    
+                    git发布流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="directory.html">
+            
+                <a href="directory.html">
+            
+                    
+                    spring
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="@Resource和@Autowired的区别.html">
+            
+                <a href="@Resource和@Autowired的区别.html">
+            
+                    
+                    @Resource和@Autowired的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="@Resource、@Autowired、@Value的循环依赖.html">
+            
+                <a href="@Resource、@Autowired、@Value的循环依赖.html">
+            
+                    
+                    @Resource、@Autowired、@Value的循环依赖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3.3" data-path="Spring源码之@Component注解解析.html">
+            
+                <a href="Spring源码之@Component注解解析.html">
+            
+                    
+                    Spring源码之@Component注解解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../question/directory.html">
+            
+                <a href="../../question/directory.html">
+            
+                    
+                    问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../question/springboot/directory.html">
+            
+                <a href="../../question/springboot/directory.html">
+            
+                    
+                    springboot
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../question/springboot/数据源配置问题.html">
+            
+                <a href="../../question/springboot/数据源配置问题.html">
+            
+                    
+                    数据源配置问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../question/java/directory.html">
+            
+                <a href="../../question/java/directory.html">
+            
+                    
+                    java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../question/java/snowflake时间回退.html">
+            
+                <a href="../../question/java/snowflake时间回退.html">
+            
+                    
+                    snowflake时间回退问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Spring源码之@Component注解解析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#spring&#x6E90;&#x7801;&#x4E4B;component&#x6CE8;&#x89E3;&#x89E3;&#x6790;"><b></b>Spring&#x6E90;&#x7801;&#x4E4B;@Component&#x6CE8;&#x89E3;&#x89E3;&#x6790;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;"><b></b>&#x4F7F;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x6E90;&#x7801;&#x5206;&#x6790;"><b></b>&#x6E90;&#x7801;&#x5206;&#x6790;</a></li></ul></ul></div><a href="#spring&#x6E90;&#x7801;&#x4E4B;component&#x6CE8;&#x89E3;&#x89E3;&#x6790;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="spring&#x6E90;&#x7801;&#x4E4B;component&#x6CE8;&#x89E3;&#x89E3;&#x6790;"><a name="spring&#x6E90;&#x7801;&#x4E4B;component&#x6CE8;&#x89E3;&#x89E3;&#x6790;" class="anchor-navigation-ex-anchor" href="#spring&#x6E90;&#x7801;&#x4E4B;component&#x6CE8;&#x89E3;&#x89E3;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>Spring&#x6E90;&#x7801;&#x4E4B;@Component&#x6CE8;&#x89E3;&#x89E3;&#x6790;</h1>
+<h2 id="&#x4F7F;&#x7528;"><a name="&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;</h2>
+<pre class="language-"><code>@Component&#x7684;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x5C06;&#x7C7B;&#x6CE8;&#x5165;&#x5230;spring&#x5BB9;&#x5668;&#x4E2D;
+</code></pre><pre class="language-"><code class="lang-java">
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>TYPE<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Documented</span>
+<span class="token annotation punctuation">@Indexed</span>
+<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * The value may indicate a suggestion for a logical component name,
+     * to be turned into a Spring bean in case of an autodetected component.
+     * @return the suggested component name, if any (or empty String otherwise)
+     */</span>
+    <span class="token class-name">String</span> <span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="&#x6E90;&#x7801;&#x5206;&#x6790;"><a name="&#x6E90;&#x7801;&#x5206;&#x6790;" class="anchor-navigation-ex-anchor" href="#&#x6E90;&#x7801;&#x5206;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6E90;&#x7801;&#x5206;&#x6790;</h2>
+<p>&#x5728; <code>ConfigurationClassParser#doProcessConfigurationClass</code> &#x65B9;&#x6CD5;&#x4E2D;</p>
+<pre class="language-"><code>    //&#x5224;&#x65AD;&#x7C7B;&#x4E0A;&#x9762;&#x662F;&#x5426;&#x6709;Component&#x6CE8;&#x89E3;
+    if (configClass.getMetadata().isAnnotated(Component.class.getName())) {
+        // Recursively process any member (nested) classes first
+        //&#x9012;&#x5F52;&#x5904;&#x7406;&#x6709;@Component&#x6CE8;&#x89E3;&#x7684;&#x5185;&#x90E8;&#x7C7B;
+        processMemberClasses(configClass, sourceClass, filter);
+    }
+</code></pre><p>configClass.getMetadata()&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x7C7B;&#x7684;&#x5143;&#x6570;&#x636E;&#x4FE1;&#x606F;
+&#x5982;&#x679C;&#x7C7B;&#x4E0A;&#x9762;&#x6709;@Component&#x6CE8;&#x89E3;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x89E3;&#x6790;&#x64CD;&#x4F5C;processMemberClasses</p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConfigurationClassParser</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">processMemberClasses</span><span class="token punctuation">(</span><span class="token class-name">ConfigurationClass</span> configClass<span class="token punctuation">,</span> <span class="token class-name">SourceClass</span> sourceClass<span class="token punctuation">,</span>
+                                      <span class="token class-name">Predicate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> filter<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+
+        <span class="token comment">//&#x83B7;&#x53D6;&#x8BE5;&#x7C7B;&#x7684;&#x5185;&#x90E8;&#x7C7B;&#x5E76;&#x53C8;&#x5305;&#x88C5;&#x6210;sourceClass&#x5BF9;&#x8C61;</span>
+        <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SourceClass</span><span class="token punctuation">&gt;</span></span> memberClasses <span class="token operator">=</span> sourceClass<span class="token punctuation">.</span><span class="token function">getMemberClasses</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>memberClasses<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SourceClass</span><span class="token punctuation">&gt;</span></span> candidates <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>memberClasses<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SourceClass</span> memberClass <span class="token operator">:</span> memberClasses<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">//&#x5982;&#x679C;&#x7C7B;&#x662F;&#x5019;&#x9009;&#x7684;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">ConfigurationClassUtils</span><span class="token punctuation">.</span><span class="token function">isConfigurationCandidate</span><span class="token punctuation">(</span>memberClass<span class="token punctuation">.</span><span class="token function">getMetadata</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+                        <span class="token operator">!</span>memberClass<span class="token punctuation">.</span><span class="token function">getMetadata</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>configClass<span class="token punctuation">.</span><span class="token function">getMetadata</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    candidates<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>memberClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//&#x6392;&#x5E8F;</span>
+            <span class="token class-name">OrderComparator</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>candidates<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//&#x5FAA;&#x73AF;&#x53BB;&#x5904;&#x7406;&#x6BCF;&#x4E00;&#x4E2A;&#x5185;&#x90E8;&#x7C7B;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SourceClass</span> candidate <span class="token operator">:</span> candidates<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>importStack<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>configClass<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>problemReporter<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CircularImportProblem</span><span class="token punctuation">(</span>configClass<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>importStack<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>importStack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>configClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                        <span class="token comment">//candidate &#x5B50;  configClass &#x7236;&#xFF0C;candidate &#x662F; configClass&#x7684;&#x5185;&#x90E8;&#x7C7B;</span>
+                        <span class="token function">processConfigurationClass</span><span class="token punctuation">(</span>candidate<span class="token punctuation">.</span><span class="token function">asConfigClass</span><span class="token punctuation">(</span>configClass<span class="token punctuation">)</span><span class="token punctuation">,</span> filter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">this</span><span class="token punctuation">.</span>importStack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5982;&#x679C;&#x7C7B;&#x4E2D;&#x6709;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x90A3;&#x4E48;&#x8981;&#x5148;&#x62FF;&#x5230;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x56E0;&#x4E3A;&#x5185;&#x90E8;&#x7C7B;&#x4E0A;&#x9762;&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x6709;&#x6CE8;&#x89E3;</p>
+<p>````java
+public class ConfigurationClassParser{
+    public Collection<sourceclass> getMemberClasses() throws IOException {
+        Object sourceToProcess = this.source;
+        if (sourceToProcess instanceof Class) {
+            Class&lt;?&gt; sourceClass = (Class&lt;?&gt;) sourceToProcess;
+            try {
+                //&#x83B7;&#x53D6;&#x5185;&#x90E8;&#x7C7B;
+                Class&lt;?&gt;[] declaredClasses = sourceClass.getDeclaredClasses();
+                List<sourceclass> members = new ArrayList&lt;&gt;(declaredClasses.length);
+                for (Class&lt;?&gt; declaredClass : declaredClasses) {
+                    members.add(asSourceClass(declaredClass, DEFAULT_EXCLUSION_FILTER));
+                }
+                return members;
+            }
+            catch (NoClassDefFoundError err) {
+                // getDeclaredClasses() failed because of non-resolvable dependencies
+                // -&gt; fall back to ASM below
+                sourceToProcess = metadataReaderFactory.getMetadataReader(sourceClass.getName());
+            }
+        }
+    }
+}</sourceclass></sourceclass></p>
+<p>&#x94FE;&#x63A5;&#xFF1A;<a href="https://blog.csdn.net/qq_27023083/article/details/113245337" target="_blank">https://blog.csdn.net/qq_27023083/article/details/113245337</a></p>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/diyiyao" target="_blank">diyiyao</a>&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">&#x77E5;&#x8BC6;&#x5171;&#x4EAB; &#x7F72;&#x540D;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2021-04-13 03:40:54 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="@Resource、@Autowired、@Value的循环依赖.html" class="navigation navigation-prev " aria-label="Previous page: @Resource、@Autowired、@Value的循环依赖">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../question/directory.html" class="navigation navigation-next " aria-label="Next page: 问题">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Spring源码之@Component注解解析","level":"1.5.3.3","depth":3,"next":{"title":"问题","level":"1.6","depth":1,"path":"question/directory.md","ref":"question/directory.md","articles":[{"title":"springboot","level":"1.6.1","depth":2,"path":"question/springboot/directory.md","ref":"question/springboot/directory.md","articles":[{"title":"数据源配置问题","level":"1.6.1.1","depth":3,"path":"question/springboot/数据源配置问题.md","ref":"question/springboot/数据源配置问题.md","articles":[]}]},{"title":"java","level":"1.6.2","depth":2,"path":"question/java/directory.md","ref":"question/java/directory.md","articles":[{"title":"snowflake时间回退问题","level":"1.6.2.1","depth":3,"path":"question/java/snowflake时间回退.md","ref":"question/java/snowflake时间回退.md","articles":[]}]}]},"previous":{"title":"@Resource、@Autowired、@Value的循环依赖","level":"1.5.3.2","depth":3,"path":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","ref":"blogs/spring/@Resource、@Autowired、@Value的循环依赖.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","disqus","github-buttons","editlink","ga","-highlight","prism","bibtex-indexed-cite","anchor-navigation-ex","page-footer-ex","splitter","todo","copy-code-button","expandable-chapters-small","donate"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"ignore":["mermaid","eval-js"],"css":["prismjs/themes/prism-solarizedlight.css"]},"disqus":{"useIdentifier":false,"shortName":"https-diyiyao-github-io-mybook"},"editlink":{"label":"Edit","multilingual":false,"base":"https://github.com/diyiyao/mybook/edit/main/"},"todo":{},"page-footer-ex":{"copyright":"By [diyiyao](https://github.com/diyiyao)，使用[知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"donate":{"alipay":"","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"bibtex-indexed-cite":{"path":"/"},"github-buttons":{"buttons":[{"user":"diyiyao","repo":"mybook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-131910384-3"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"bibCount":0,"variables":{},"title":"title","bib":[],"gitbook":"*"},"file":{"path":"blogs/spring/Spring源码之@Component注解解析.md","mtime":"2021-04-13T03:40:54.177Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-13T03:41:42.921Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
